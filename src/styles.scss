@@ -1,0 +1,39 @@
+/* Importing Bootstrap SCSS file. */
+// @import 'bootstrap/scss/bootstrap';
+// @import "../node_modules/bootstrap/scss/bootstrap";
+
+
+// @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// @import '~bootstrap/dist/css/bootstrap.min.css';
+// @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+@import '../node_modules/font-awesome/css/font-awesome.css';
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback");
+@import "../node_modules/admin-lte/plugins/fontawesome-free/css/all.min.css";
+
+// @import url("https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.2-web/css/all.min.css");
+
+@import "../node_modules/admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css";
+
+@import "../node_modules/admin-lte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css";
+
+@import "../node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
+
+@import "../node_modules/admin-lte/plugins/select2/css/select2.min.css";
+
+@import '../node_modules/drawflow/dist/drawflow.min.css';
+@import '../node_modules/summernote/dist/summernote-lite.css';
+@import "../node_modules/admin-lte/plugins/toastr/toastr.min.css";
+
+@import "../node_modules/admin-lte/dist/css/adminlte.min.css";
+
+// :root {
+//     @media (prefers-color-scheme: dark) {
+//         input::placeholder {
+//             color: #6c757d;
+//             /* Cor do placeholder para tema escuro */
+//         }
+//     }
+// }
+

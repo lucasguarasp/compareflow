@@ -1,0 +1,48 @@
+<aside id="mainSidebar">
+  <!-- Brand Logo -->
+  <a [routerLink]="['/']" class="brand-link">
+    <img src="assets/img/IuConverseLogo.png" alt="IuConverse" class="brand-image img-circle elevation-3" height="33"
+      width="33" rounded style="opacity: .8">
+    <span class="brand-text font-weight-light">IuConverse</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="true">
+
+        <div class="" *ngIf="!menu?.length; else hasMenu">
+          <div class="col no-content">loading...</div>
+        </div>
+
+        <ng-template #hasMenu>
+          <ng-container *ngFor="let item of menu">
+            <li class="nav-item" *ngIf="!item?.title" >
+              <a type="button" [routerLink]="item?.rota" class="nav-link" [class.active]="isActive(item)">
+                <i [ngClass]="item?.iconClasses"></i>
+                <p>{{item?.name}}
+                  <i *ngIf="item?.children" class="fas fa-angle-left right"></i>
+                  <span class="right badge badge-{{item?.badge?.color}}">{{item?.badge?.text}}</span>
+                </p>
+              </a>
+              <ul class="nav nav-treeview" *ngIf="item?.children">
+                <li class="nav-item" *ngFor="let child of item.children" (click)="toggleItemMenu(child)">
+                  <a type="button" [routerLink]="child?.rota" class="nav-link" [class.active]="isActive(child)">
+                    <i [ngClass]="child?.iconClasses"></i>
+                    <p>{{child?.name}}
+                      <span class="right badge badge-{{child?.badge?.color}}">{{child?.badge?.text}}</span>
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-header" *ngIf="item?.title">{{item.title}}</li>
+          </ng-container>
+        </ng-template>
+
+      </ul>
+    </nav>
+  </div>
+</aside>

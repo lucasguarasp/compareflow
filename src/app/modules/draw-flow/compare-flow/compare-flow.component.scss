@@ -1,0 +1,31 @@
+::ng-deep .alterado {
+  background-color: rgba(255, 255, 0, 0.5) !important;
+}
+
+::ng-deep .adicionado {
+  background-color: rgba(0, 255, 0, 0.5) !important;
+}
+
+::ng-deep .removido {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+::ng-deep .igual {
+  background-color: rgba(0, 0, 255, 0.5) !important;
+}
+
+::ng-deep pre {
+  color: var(--color);
+}
+
+::ng-deep pre .before {
+  background-color: rgba(255, 0, 0, 0.404) !important;  
+}
+
+::ng-deep pre .after {
+  background-color: rgba(0, 128, 0, 0.404) !important;
+}
+
+.card-body {
+  overflow-x: auto;
+}

@@ -1,0 +1,20 @@
+.main-header {
+    padding: .5rem 1.0rem;
+}
+
+.control-sidebar {
+    transition: right .3s ease-in-out, display .3s ease-in-out;
+}
+
+.control-sidebar-open {
+    right: 0;
+    display: block;
+    // transform: translateX(-300px);
+
+}
+
+// .control-sidebar-slide-open .control-sidebar,
+// .control-sidebar-slide-open .control-sidebar::before {
+//     right: 0;
+//     transition: right .3s ease-in-out, display .3s ease-in-out;
+// }

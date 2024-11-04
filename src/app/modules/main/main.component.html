@@ -1,0 +1,36 @@
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <app-header *ngIf="appLoaded"></app-header>
+    <!-- /.navbar -->
+
+    <app-menu-sidebar *ngIf="appLoaded" class="main-sidebar sidebar-dark-primary elevation-4"
+        (menuItem)="toggleMenuItem($event)">
+    </app-menu-sidebar>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <app-dynamic-header></app-dynamic-header>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">      
+     
+    </aside>
+    <!-- /.control-sidebar -->
+
+    <app-footer></app-footer>
+</div>

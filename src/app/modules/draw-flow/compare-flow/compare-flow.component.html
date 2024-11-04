@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Flow 1 - Before</h5>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 p-0">
+            <app-draw #drawflow1 [editor]="editor1" (editorEmitter)="editorEmitted($event)" [locked]="true"
+              [drawId]="'drawflow1'"></app-draw>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Flow 2 - After</h5>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 p-0">
+            <app-draw #drawflow2 [editor]="editor2" (editorEmitter)="editorEmitted2($event)" [locked]="true"
+              [drawId]="'drawflow2'"></app-draw>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-3">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body text-center">
+        <button class="btn btn-primary" (click)="compareFlow()">Compare Flows</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" [ngClass]="{ 'd-none': !editorComparadoVisible  } ">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Activities changed - {{changes.before.length}}</h5>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <span *ngIf="changes.before.length === 0 && changes.after.length === 0">No changes</span>
+        <div *ngFor="let change of changes.before; let i = index">
+          <span>{{change.name}}:</span>
+          <pre><div class="before">{{ change | json }}</div><div class="after">{{ changes.after[i] | json }}</div></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" [ngClass]="{ 'd-none': !editorComparadoVisible  } ">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Activities added - {{added.before.length}}</h5>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <span *ngIf="added.before.length === 0 && added.after.length === 0">No changes</span>
+        <div *ngFor="let add of added.before; let i = index">
+          <span>{{add.name}}:</span>
+          <pre><div class="before">{{ add | json }}</div><div class="after">{{ added.after[i] | json }}</div></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" [ngClass]="{ 'd-none': !editorComparadoVisible  } ">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Activities removed - {{removed.before.length}}</h5>
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <span *ngIf="removed.before.length === 0 && removed.after.length === 0">No changes</span>
+        <div *ngFor="let remove of removed.before; let i = index">
+          <span>{{remove.name}}:</span>
+          <pre><div class="before">{{ remove | json }}</div><div class="after">{{ removed.after[i] | json }}</div></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

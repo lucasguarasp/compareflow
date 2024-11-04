@@ -1,0 +1,23 @@
+<div class="wrapper-draw">
+
+    <div id="drawflow" (drop)="drop($event)" (dragover)="allowDrop($event)" [ngClass]="'parent-drawflow ' + drawId">
+
+        <button class="btn-import" (click)="triggerFileSelect()">Import</button>
+        <!-- <div class="btn-export" (click)="export()">Export</div> -->
+
+        <input type="file" accept=".json, application/json, .txt, text/plain" [id]="'drawflowfile' + (drawId ? '-' + drawId : '')" (change)="onSelectFile($event)"
+            style="display: none;">
+
+        <div class="btn-lock" [ngClass]="locked ? 'locked' : ''">
+            <i (click)="changeMode()" class="fas fa-lock-open" [ngStyle]="{ display: locked ? 'none' : 'block' }"></i>
+            <i (click)="changeMode()" class="fas fa-lock" [ngStyle]="{ display: locked ? 'block' : 'none' }"></i>
+        </div>
+
+        <div class="bar-zoom">
+            <i class="fas fa-search-minus" (click)="onZoomOut()" role="button"></i>
+            <i class="fas fa-search" (click)="onZoomReset()" role="button"></i>
+            <i class="fas fa-search-plus" (click)="onZoomIn()" role="button"></i>
+        </div>
+    </div>
+
+</div>

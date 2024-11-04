@@ -1,0 +1,12 @@
+::ng-deep .note-editor.note-frame {
+    border-radius: 5px;
+    // display: flex;
+    // justify-content: flex-end;
+    // align-items: flex-end;
+}
+
+::ng-deep body.dark-mode .note-editor.note-frame {
+    border: 1px solid #454d55;    
+    border-radius: 5px;
+    color: rgb(208, 212, 219);
+}

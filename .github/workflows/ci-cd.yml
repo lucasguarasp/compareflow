@@ -1,0 +1,47 @@
+name: Angular CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - 'feature/*'
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 20
+        
+    - name: Install Dependencies
+      run: npm install --ignore-warnings  # Adicionando --ignore-warnings aqui
+      
+      
+    - name: Build Project
+      run: npm run build --ignore-warnings  # Adicionando --ignore-warnings aqui
+      
+    # - name: Run Tests
+    #   run: npm test --ignore-warnings  # Adicionando --ignore-warnings aqui
+
+  copy_to_develop:
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    if: startsWith(github.ref, 'refs/heads/feature/')
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Copy to Develop
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "<>"
+        git fetch origin develop:develop
+        git checkout develop
+        git merge ${{ github.ref }} --allow-unrelated-histories
+        git push origin develop
