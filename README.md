@@ -1,11 +1,9 @@
-# IuConverse
+# CompareFlow
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
 
 The project contains
-- 'IUConverse' in Angular;
-- 'jwt-auth-node' to perform authentication;
-- 'iuconverse-api-getway' to communicate with Mongo DB database and external api calls
+- 'CompareFlow' in Angular;
 
 ## Development server
 

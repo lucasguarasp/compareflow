@@ -3,6 +3,7 @@ export class ComponentItem {
     [key: string]: any;
     id: string;
     name: string;
+    activity: any;
     override: boolean;
     activityInputs: Array<any>;
     class: string;

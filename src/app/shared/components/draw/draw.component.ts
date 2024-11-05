@@ -23,6 +23,7 @@ export class DrawComponent implements OnInit {
 
   @Input() editor: Drawflow;
   @Output() editorEmitter = new EventEmitter<Drawflow>();
+  @Output() flowName = new EventEmitter<string>();
 
   editDivHtml: HTMLElement;
   editButtonShown: boolean = false;
@@ -498,7 +499,7 @@ export class DrawComponent implements OnInit {
     }
   }
 
-  private openModalConfig() {    
+  private openModalConfig() {
   }
 
   private async updateNameComponentHtml(typeComponentSelected: string, itemChanged: ComponentItem) {
@@ -620,7 +621,6 @@ export class DrawComponent implements OnInit {
   }
 
   triggerFileSelect() {
-
     const fileInput = this.drawId ? document.getElementById(`drawflowfile-${this.drawId}`) : document.getElementById('drawflowfile') as HTMLInputElement;
     if (fileInput) {
       fileInput.click();
@@ -656,31 +656,10 @@ export class DrawComponent implements OnInit {
       await this.editor.import(draw);
       await this.buildArrowsConnections()
       this.toastr.success('successfully imported')
-      // Swal.fire({
-      //   toast: true,
-      //   // title: 'Titulo do Toast',
-      //   text: 'successfully imported',
-      //   icon: 'success',
-      //   position: 'top-end',
-      //   showConfirmButton: false,
-      //   timer: 3000,
-      //   timerProgressBar: true,
-      //   color: '#6c757d'
-      // });
+      this.flowName.emit(`${dataToImport?.definicao_atividade.flowName + "| v" + dataToImport?.definicao_atividade.flowVersionNumber}`);     
     } catch (error) {
       console.log(error);
-      this.toastr.error('invalid json format');
-      // Swal.fire({
-      //   toast: true,
-      //   // title: 'Titulo do Toast',
-      //   text: 'invalid json format',
-      //   icon: 'error',
-      //   position: 'top-end',
-      //   showConfirmButton: false,
-      //   timer: 3000,
-      //   timerProgressBar: true,
-      //   color: '#6c757d'
-      // });
+      this.toastr.error('invalid json format');    
     }
   }
 

@@ -6,17 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    data: { title: 'Home', breadcrumb: ['Home'] },
     children: [
       {
-        path: 'compare',
-        component: CompareFlowComponent,
-        data: { title: 'Compare Flow', breadcrumb: ['Compare Flow'] }
-      },
-      {
-        path: 'compare/:flowId/:compareFlowId',
-        component: CompareFlowComponent,
-        data: { title: 'Compare Flow', breadcrumb: ['Compare Flow'] }
+        path: '',
+        component: CompareFlowComponent
       }
     ]
   }

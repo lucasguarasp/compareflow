@@ -16,12 +16,13 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
   @ViewChild('drawflow1') drawflow1: DrawComponent;
   @ViewChild('drawflow2') drawflow2: DrawComponent;
 
-
   editor1: Drawflow;
   originalEditor1: Drawflow;
+  flowName1: string = 'Flow 1 - before';
 
   editor2: Drawflow;
   originalEditor2: Drawflow;
+  flowName2: string = 'Flow 2 - After';
 
   editorComparadoVisible: boolean = false;
 
@@ -43,7 +44,7 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
   flowId: string;
   compareFlowId: string;
 
-  constructor(private route: ActivatedRoute, private sharedDataService: SharedDataService, private cdref: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private cdref: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.cdref.detectChanges();
@@ -52,7 +53,6 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.originalEditor1 = this.editor1;
     this.originalEditor2 = this.editor2;
-  
   }
 
   editorEmitted(editor: Drawflow) {
@@ -61,6 +61,16 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
 
   editorEmitted2(editor: Drawflow) {
     this.editor2 = editor
+  }
+
+  setflowName1(name: string) {
+    this.flowName1 = name;
+    this.cdref.detectChanges();
+  }
+
+  setflowName2(name: string) {
+    this.flowName2 = name;
+    this.cdref.detectChanges();
   }
 
   private resetChanges() {
@@ -141,46 +151,22 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
     const data2 = node2;
 
     let hasChanges = false;
-    
+
     let result: { newObj: any, beforeObj: any }[] = this.compareObjects(data1, data2);
 
     if (result.length > 0) {
-      const beforeObjFinal = {};
-      const newObjFinal = {};
 
       result.forEach(result => {
-      //this.buildNestedObject(beforeObjFinal, result.beforeObj);
-       // this.buildNestedObject(newObjFinal, result.newObj);
-        this.changes.before.push({ name: node1.name, activityId: node1.id, ...result.beforeObj });
-        this.changes.after.push({ name: node2.name, activityId: node2.id, ...result.newObj });
+        //this.buildNestedObject(beforeObjFinal, result.beforeObj);
+        // this.buildNestedObject(newObjFinal, result.newObj);
+        this.changes.before.push({ name: node1?.activity?.side_panel?.general?.activityName, activityId: node1?.activity?.side_panel?.general?.activityId, ...result.beforeObj });
+        this.changes.after.push({ name: node2?.activity?.side_panel?.general?.activityName, activityId: node2?.activity?.side_panel?.general?.activityId, ...result.newObj });
       });
       this.updateHtmlNodeFromView(node2, this.drawflow2, 'alterado');
     }
 
 
     return hasChanges;
-  }
-  
-
-  changed: Array<{ before: any, after: any }> = new Array<{ before: any, after: any }>();
-  private deepEqual(obj1: any, obj2: any): boolean | { before: any, after: any } {
-
-    if (obj1 === obj2) return true; // referência igual
-    if (obj1 == null || obj2 == null) return false; // um é null
-    if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return false; // não são objetos
-
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
-
-    if (keys1.length !== keys2.length) return false; // número de chaves diferente
-
-    for (let key of keys1) {
-      if (!keys2.includes(key) || !this.deepEqual(obj1[key], obj2[key])) {
-        this.changed.push({ before: { [key]: obj1[key] }, after: { [key]: obj2[key] } }); // chaves diferentes ou valores diferentes
-        return false
-      }
-    }
-    return true;
   }
 
   buildNestedObject(target: any, source: any) {
@@ -218,11 +204,14 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
               // Se ambos são objetos, continuar recursivamente
               recurse(o1[key], o2[key], currentPath);
             } else if (o1[key] !== o2[key]) {
-              // Se os valores são diferentes, adicionar ao array de diferenças
-              differences.push({
-                newObj: { [currentPath]: o1[key] },
-                beforeObj: { [currentPath]: o2[key] }
-              });
+              // Excluir alterações em pos_x ou pos_y
+              if (key !== 'pos_x' && key !== 'pos_y') {
+                // Se os valores são diferentes, adicionar ao array de diferenças
+                differences.push({
+                  newObj: { [currentPath]: o1[key] },
+                  beforeObj: { [currentPath]: o2[key] }
+                });
+              }
             }
           } else {
             // Se a chave só existe no obj1, adicionar o valor novo
@@ -238,7 +227,6 @@ export class CompareFlowComponent implements OnInit, AfterViewInit {
     recurse(obj1, obj2, '');
 
     return differences;
-    
   }
 
 

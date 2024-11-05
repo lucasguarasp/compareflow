@@ -2,6 +2,7 @@
 export class Flow {
     id: string;
     flowName: string;
+    definicao_atividade: any;
     description: string;
     version: number;
     flowId: string;
