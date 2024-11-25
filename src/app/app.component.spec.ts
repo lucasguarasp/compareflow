@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'wflow-bot'`, () => {
+  it(`should have as title 'compare-flow'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('wflow-bot');
+    expect(app.title).toEqual('compare-flow');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, wflow-bot');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, compare-flow');
   });
 });
