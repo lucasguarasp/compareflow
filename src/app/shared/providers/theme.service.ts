@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ThemeService {
 
-  private readonly THEME_KEY = 'iuconverse:theme';
+  private readonly THEME_KEY = 'compareflow:theme';
 
   constructor() { }
 
